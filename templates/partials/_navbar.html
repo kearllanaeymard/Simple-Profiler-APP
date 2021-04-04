@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/users">Profiler App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {{nav_user}}" href="/users">Users</a>
+          </li>
+
+
+          {% if user.is_authenticated %}
+
+            <li class="nav-item">
+              <a class="nav-link {{nav_add}}" href="/users/add">Add New</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link {{nav_log}}" href="/users/logout">Log Out</a>
+            </li>
+          {% else %}  
+            <li class="nav-item">
+              <a class="nav-link {{nav_log}}" href="/users/login">Log In</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {% if user.is_authenticated %}
+        <div><h5 class="text-white" >Hello <strong style="text-transform: capitalize">{{user}}</strong>!</h5></div>
+      {% endif %}
+
+    </div>
+  </nav>

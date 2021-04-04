@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{user.user_account_fname}} {{ user.user_account_lname }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-body">
+                <form class="row g-3" method="POST" action="edituser" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error_message}}
+                    </div>
+                    {% endif %}
+
+                    <div class="col-md-6">
+                      <label for="fname" class="form-label">First Name</label>
+                      <input type="text" class="form-control" id="fname" name="fname" required value="{{user_account.user_fname}}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="lname" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" id="lname" name="lname" required value="{{user_account.user_lname}}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email Address</label>
+                      <input type="email" class="form-control" id="email" name="email" required value="{{user_account.user_email}}">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="position" class="form-label">Position</label>
+                      <input type="text" class="form-control" id="position" name="position" required value="{{user_account.user_position}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Profile Picture</label><br>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                    </div>
+                    <div class="col-md-4">
+                        <br><button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{% url 'users:detail' user_account.id %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                  </form>
+            </div>
+          </div>
+
+    </div>
+
+{% endblock %}
